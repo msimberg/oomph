@@ -1,7 +1,7 @@
 [submodule "ext/hwmalloc"]
 	path = ext/hwmalloc
     url = https://github.com/ghex-org/hwmalloc.git
-    branch = master
+	branch = align_2mb
 [submodule "ext/googletest"]
 	path = ext/googletest
 	url = https://github.com/google/googletest.git
