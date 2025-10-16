@@ -17,6 +17,8 @@
 #include <context.hpp>
 #include <request_queue.hpp>
 
+#include <iostream>
+
 namespace oomph
 {
 class communicator_impl : public communicator_base<communicator_impl>
@@ -39,6 +41,7 @@ class communicator_impl : public communicator_base<communicator_impl>
     {
         MPI_Request        r;
         const_device_guard dg(ptr);
+        std::cerr << "oomph/src/mpi/communicator.cpp: send: data: " << dg.data() << ", size: " << size << "\n";
         OOMPH_CHECK_MPI_RESULT(MPI_Isend(dg.data(), size, MPI_BYTE, dst, tag, mpi_comm(), &r));
         return {r};
     }
@@ -48,6 +51,7 @@ class communicator_impl : public communicator_base<communicator_impl>
     {
         MPI_Request  r;
         device_guard dg(ptr);
+        std::cerr << "oomph/src/mpi/communicator.cpp: send 2: data: " << dg.data() << ", size: " << size << "\n";
         OOMPH_CHECK_MPI_RESULT(MPI_Irecv(dg.data(), size, MPI_BYTE, src, tag, mpi_comm(), &r));
         return {r};
     }
